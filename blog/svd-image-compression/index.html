@@ -5,11 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Singular Value Decomposition and it&#39;s use in Image compression.</title>
 		<meta name="description" content="Learning how to compress images in C++ using Eigen and stb image.">
-		<link rel="alternate" href="/eleventy-base-blog/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v8">
-		<link rel="alternate" href="/eleventy-base-blog/feed/feed.json" type="application/json" title="Eleventy Base Blog v8">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v8">
+		<link rel="alternate" href="/feed/feed.json" type="application/json" title="Eleventy Base Blog v8">
 
 	
-			<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+			<link
+		rel="stylesheet"
+		href="https://unpkg.com/katex@latest/dist/katex.min.css"
+	/>
 		
 		<style>/**
  * okaidia theme for JavaScript, CSS and HTML
@@ -476,13 +479,13 @@ h2 + .header-anchor {
 		<a href="#skip" class="visually-hidden">Skip to main content</a>
 
 		<header>
-			<a href="/eleventy-base-blog/" class="home-link">Eleventy Base Blog v8</a>
+			<a href="/" class="home-link">Eleventy Base Blog v8</a>
 			<nav>
 				<h2 class="visually-hidden">Top level navigation menu</h2>
 				<ul class="nav">
-					<li class="nav-item"><a href="/eleventy-base-blog/">Home</a></li>
-					<li class="nav-item"><a href="/eleventy-base-blog/blog/">Archive</a></li>
-					<li class="nav-item"><a href="/eleventy-base-blog/about/">About Me</a></li>
+					<li class="nav-item"><a href="/">Home</a></li>
+					<li class="nav-item"><a href="/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/about/">About Me</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -493,12 +496,12 @@ h2 + .header-anchor {
 
 <ul class="post-metadata">
 	<li><time datetime="2024-03-25">25 March 2024</time></li>
-	<li><a href="/eleventy-base-blog/tags/linear-algebra/" class="post-tag">linear algebra</a></li>
+	<li><a href="/tags/linear-algebra/" class="post-tag">linear algebra</a></li>
 </ul>
 
 
 ​<p>While reading through Strang's <em>Linear Algebra and It's Applications</em> I came upon this passage about SVD and one of it's many applications image compression.
-<img alt="svd-strang" src="/eleventy-base-blog/img/SVD-Strang.png"></p>
+<img alt="svd-strang" src="/img/SVD-Strang.png"></p>
 <p>SVD in a more compact form with the outer product being explicit.</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>r</mi></msubsup><msub><mi>σ</mi><mi>k</mi></msub><msub><mi>u</mi><mi>k</mi></msub><mo>⊗</mo><msub><mi>v</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\sum_{k=1}^{r}\sigma_{k}u_{k} \otimes v_{k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104em;vertical-align:-0.2997em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⊗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
 <h2 id="how-svd-compression-works" tabindex="-1">How SVD Compression Works <a class="header-anchor" href="#how-svd-compression-works">#</a></h2>
@@ -583,10 +586,10 @@ h2 + .header-anchor {
 <span class="token punctuation">}</span></code></pre>
 <h2 id="the-result" tabindex="-1">The result <a class="header-anchor" href="#the-result">#</a></h2>
 <p>The image was converted gray scale for the sake of simplicity, for color you need to run SVD on all the channels.</p>
-<img src="/eleventy-base-blog/img/Lenna.png">
-<img src="/eleventy-base-blog/img/LennaBW.png">
+<img src="/img/Lenna.png" >
+<img src="/img/LennaBW.png">
 
-<ul class="links-nextprev"><li>Previous: <a href="/eleventy-base-blog/blog/fourthpost/">This is my fourth post.</a></li>
+<ul class="links-nextprev"><li>Previous: <a href="/blog/fourthpost/">This is my fourth post.</a></li>
 </ul>
 
 
@@ -594,6 +597,6 @@ h2 + .header-anchor {
 
 		<footer></footer>
 
-		<!-- Current page: /eleventy-base-blog/blog/svd-image-compression/ -->
+		<!-- Current page: /blog/svd-image-compression/ -->
 	</body>
 </html>
