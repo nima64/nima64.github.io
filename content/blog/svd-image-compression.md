@@ -7,7 +7,7 @@ tags:
 ---
 
 While reading through Strang's _Linear Algebra and It's Applications_ I came upon this passage about SVD and one of it's many applications image compression.
-<img src="/img/SVD-Strang.png" width="500">
+<img alt="svd-strang" src="/img/SVD-Strang.png">
 
 SVD in a more compact form with the outer product being explicit.
 
