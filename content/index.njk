@@ -5,6 +5,9 @@ eleventyNavigation:
   order: 1
 numberOfLatestPostsToShow: 3
 ---
+I'm a second year math major. I'm also a computer geek, writting software is my hobby and passion. I strive to solve real world problems with math & programmming. </p>
+"The key to understanding complicated things is knowing what not to look at" - Gerald Sussman
+
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
 <h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
@@ -17,6 +20,7 @@ numberOfLatestPostsToShow: 3
 {% if morePosts > 0 %}
 <p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="/blog/">the archive</a>.</p>
 {% endif %}
+
 
 {# List every content page in the project #}
 {#

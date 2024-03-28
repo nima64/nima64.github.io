@@ -7,9 +7,10 @@ tags:
 ---
 
 While reading through Strang's _Linear Algebra and It's Applications_ I came upon this passage about SVD and one of it's many applications image compression.
-<img alt="svd-strang" src="/img/SVD-Strang.png">
 
-SVD in a more compact form with the outer product being explicit.
+{% image "./SVD-Strang.png" ,"test"%}
+
+SVD can be rewritten in a more compact form with the outer product being explicit.
 
 $$\sum_{k=1}^{r}\sigma_{k}u_{k} \otimes v_{k}$$
 
@@ -104,6 +105,5 @@ int main() {
 
 The image was converted gray scale for the sake of simplicity, for color you need to run SVD on all the channels.
 
-<img src="/img/Lenna.png" >
-
-<img src="/img/LennaBW.png">
+{% image "./Lenna.png" ,"test"%}
+{% image "./LennaBW.png" ,"test"%}
