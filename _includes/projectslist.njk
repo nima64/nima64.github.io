@@ -1,0 +1,9 @@
+{# {%- css %}.postlist { counter-reset: start-from {{ (postslistCounter or postslist.length) + 1 }} }{% endcss %} #}
+<ul reversed class="postlist">
+{% for project in projectslist | reverse %}
+	<li>
+		<a href="{{ project.data.projectURL }}" class="postlist-link">{% if project.data.title %}{{ project.data.title }}{% else %}<code>{{ project.url }}</code>{% endif %}</a>
+		<p>{{ project.data.description }}</p>
+	</li>
+{% endfor %}
+</ol>

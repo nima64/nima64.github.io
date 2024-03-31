@@ -7,4 +7,6 @@ eleventyNavigation:
 
 # About Me
 
-Hi I'm Nyima, I'm a second year math major. My passions lie in applied math, computer graphics and low levels systems programming.
+Hi I'm Nyima, I'm a second year math major . I'm also a computer geek, writting software is my hobby and passion. I strive to solve real world problems with math & programmming.
+
+"The key to understanding complicated things is knowing what not to look at" - Gerald Sussman
