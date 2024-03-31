@@ -57,7 +57,12 @@ html {
 /* body {
 	max-width: 40em;
 } */
+
 /* custom edits */
+#myCanvas{
+	margin: 0 auto;
+	display: block;
+}
 h1, h2,h3{
 	padding:  1.5rem 0;
 }
