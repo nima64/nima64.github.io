@@ -4,7 +4,7 @@
 	<subtitle>blog about math and computer science</subtitle>
 	<link href="https://example.com/feed/feed.xml" rel="self"/>
 	<link href="https://example.com/"/>
-	<updated>2024-03-31T20:29:25Z</updated>
+	<updated>2024-04-01T01:46:48Z</updated>
 	<id>https://example.com/</id>
 	<author>
 		<name>nyima tamang</name>
@@ -14,7 +14,7 @@
 	<entry>
 		<title>Singular Value Decomposition and it&#39;s use in Image compression.</title>
 		<link href="https://example.com/blog/svd-image-compression/"/>
-		<updated>2024-03-31T20:29:25Z</updated>
+		<updated>2024-04-01T01:46:48Z</updated>
 		<id>https://example.com/blog/svd-image-compression/</id>
 		<content type="html">&lt;p&gt;While reading through Strang&#39;s &lt;em&gt;Linear Algebra and It&#39;s Applications&lt;/em&gt; I came upon this passage about SVD and one of it&#39;s many applications image compression.&lt;/p&gt;
 &lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/_Z8w6LZVpo-1584.avif 1584w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/_Z8w6LZVpo-1584.webp 1584w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/_Z8w6LZVpo-1584.png&quot; width=&quot;1584&quot; height=&quot;926&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
