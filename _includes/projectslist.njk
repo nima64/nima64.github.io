@@ -1,9 +1,38 @@
 {# {%- css %}.postlist { counter-reset: start-from {{ (postslistCounter or postslist.length) + 1 }} }{% endcss %} #}
-<ul reversed class="postlist">
-{% for project in projectslist | reverse %}
-	<li>
-		<a href="{{ project.data.projectURL }}" class="postlist-link">{% if project.data.title %}{{ project.data.title }}{% else %}<code>{{ project.url }}</code>{% endif %}</a>
-		<p>{{ project.data.description }}</p>
-	</li>
-{% endfor %}
-</ol>
+{# <ul reversed class="postlist">
+	{% for project in projectslist | reverse %}
+		<li>
+			<div>
+				<img src=""/>
+			</div>
+			<div>
+				<a href="{{ project.data.projectURL }}" class="postlist-link">
+					{% if project.data.title %}{{ project.data.title }}
+					{% else %}
+						<code>{{ project.url }}</code>
+					{% endif %}
+				</a>
+				<p>{{ project.data.description }}</p>
+			</div>
+		</li>
+	{% endfor %}
+</ol> #}
+
+<div class="container my-4">
+	{% for project in projectslist | reverse %}
+		<div class="row">
+			<div class="col-md">
+				<img src="{{project.data.imgURL}}"/>
+			</div>
+			<div class="col-md">
+				<div class="py-4">
+
+					<a href="{{project.data.projectURL}}">
+						<h4 class="pt-4">{{project.data.title}}</h4>
+					</a>
+				</div>
+				{{project.content | safe}}
+			</div>
+		</div>
+	{% endfor %}
+</div>
