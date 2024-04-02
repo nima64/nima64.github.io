@@ -2,52 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 	
 	<url>
-		<loc>https://example.com/blog/fourthpost/</loc>
-		<lastmod>2018-09-30</lastmod>
-	</url>
-	
-	<url>
 		<loc>https://example.com/about/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/blog/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/blog/svd-image-compression/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/projects/geology-bingo/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/</loc>
-		<lastmod>2024-04-01</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://example.com/tags/second-tag/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/projects/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/linear-algebra/</loc>
-		<lastmod>2024-04-01</lastmod>
+		<lastmod>2024-04-02</lastmod>
 	</url>
 </urlset>
