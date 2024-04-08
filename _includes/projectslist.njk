@@ -18,15 +18,14 @@
 	{% endfor %}
 </ol> #}
 
-<div class="container my-4">
+<div class="container col-md-10 my-4">
 	{% for project in projectslist | reverse %}
 		<div class="row">
-			<div class="col-md">
+			<div class="col-lg">
 				<img src="{{project.data.imgURL}}"/>
 			</div>
-			<div class="col-md">
+			<div class="col-lg">
 				<div class="py-4">
-
 					<a href="{{project.data.projectURL}}">
 						<h4 class="pt-4">{{project.data.title}}</h4>
 					</a>
