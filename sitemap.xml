@@ -3,41 +3,41 @@
 	
 	<url>
 		<loc>https://example.com/about/</loc>
-		<lastmod>2024-04-02</lastmod>
+		<lastmod>2024-04-08</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/blog/</loc>
-		<lastmod>2024-04-02</lastmod>
+		<lastmod>2024-04-08</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/blog/svd-image-compression/</loc>
-		<lastmod>2024-04-02</lastmod>
+		<lastmod>2024-04-08</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/</loc>
-		<lastmod>2024-04-02</lastmod>
+		<lastmod>2024-04-08</lastmod>
 	</url>
 	
 	<url>
-		<loc>https://example.com/projects/geology-bingo/</loc>
-		<lastmod>2024-04-02</lastmod>
+		<loc>https://example.com/projects/study-budy/</loc>
+		<lastmod>2024-04-08</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/</loc>
-		<lastmod>2024-04-02</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://example.com/tags/projects/</loc>
-		<lastmod>2024-04-02</lastmod>
+		<lastmod>2024-04-08</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/linear-algebra/</loc>
-		<lastmod>2024-04-02</lastmod>
+		<lastmod>2024-04-08</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://example.com/tags/projects/</loc>
+		<lastmod>2024-04-08</lastmod>
 	</url>
 </urlset>
