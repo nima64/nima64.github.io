@@ -12,6 +12,7 @@ const pluginImages = require("./eleventy.config.images.js");
 
 //my plugins
 const katex = require("katex");
+const pluginTOC = require('eleventy-plugin-toc');
 
 module.exports = function (eleventyConfig) {
 	// Copy the contents of the `public` folder to the output folder
@@ -24,9 +25,11 @@ module.exports = function (eleventyConfig) {
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
+
 	// Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 
+	eleventyConfig.addPlugin(pluginTOC);
 	// App plugins
 	eleventyConfig.addPlugin(pluginDrafts);
 	eleventyConfig.addPlugin(pluginImages);
