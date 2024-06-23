@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>nyima tamang blog</title>
+		<title>First 3 Weeks of summer of code with VLC player</title>
 		<meta name="description" content="blog about math and computer science">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="nyima tamang blog">
 		<link rel="alternate" href="/feed/feed.json" type="application/json" title="nyima tamang blog">
@@ -20,24 +20,174 @@
 		
 		<link href="/fa-free/css/all.min.css" rel="stylesheet"/>
 		<style>
-			/* Message Box */
-.message-box {
-	--color-message-box: #ffc;
+			/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
 
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
 	display: block;
-	background-color: var(--color-message-box);
-	color: var(--color-gray-90);
-	padding: 1em 0.625em; /* 16px 10px /16 */
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
 }
-.message-box ol {
-	margin-top: 0;
-}
-
-/* @media (prefers-color-scheme: dark) {
-	.message-box {
-		--color-message-box: #082840;
-	}
-} */
 * { box-sizing: border-box; }
 /* Defaults */
 :root {
@@ -362,31 +512,49 @@ h2 + .header-anchor {
 		</header>
 
 		<main class="container-md mx-auto " id="skip">
-			<!-- Delete this message, it will also remove the component CSS from the bundle -->
-
-<!-- Stop deleting -->
-
-<h1>Tags</h1>
-
-<ul>
-
+			<div class="mx-auto" style="max-width: 40em">
 	
-	<li><a href="/tags/gsoc/" class="post-tag">GSOC</a></li>
+	<img style="max-height: 300px;width: auto;" src=/img/VLC-logo.jpg>
+	<h1>First 3 Weeks of summer of code with VLC player</h1>
+	<ul class="post-metadata">
+		<li>
+			<time datetime="2024-06-23">23 June 2024</time>
+		</li>
+			<li>
+				<a href="/tags/gsoc/" class="post-tag">GSOC</a>, 
+			</li>
+			<li>
+				<a href="/tags/c/" class="post-tag">C</a>, 
+			</li>
+			<li>
+				<a href="/tags/lua/" class="post-tag">Lua</a>
+			</li>
+	</ul>
+<aside>
+  <nav class="toc" >
+        <ol><li><a href="#first-week-building-vlc">First Week; Building VLC</a></li><li><a href="#second-week-writting-tests">Second Week; Writting Tests</a></li></ol>
+      </nav>
+</aside>
+	​<h2 id="first-week-building-vlc" tabindex="-1">First Week; Building VLC <a class="header-anchor" href="#first-week-building-vlc">#</a></h2>
+<p>With the current repo of vlc player located in their <a href="https://code.videolan.org/videolan/vlc/">gitlab</a> they have two build systems <strong>meson</strong> and <strong>gnu autotools</strong>.</p>
+<p>The main advantage with meson is the ninja builds it produces which are <em>super</em> fast, autotools is much slower but you they allow you to easily disable and enable dependcies the cli. And currently meson build doesn't work for macos.</p>
+<p>I ended up to picking meson that it produces a compile_commands.json needed for clangd lang server.</p>
+<p>Some big problems I ran into was finding the right packages, alot of the times it I would install the package but it wouldn't register because pkg-conf couldn't find it. So I made sure installed either lib or dev packages.</p>
+<p>I found myself in a rut tyring to find the right packages for QT because the script would say I would was missing one of out of the 5 QT packages and I didn't know which one it was. How I ended up find the right packages was by looking at <strong>vlc/modules/gui/qt/meson.build</strong> which contains all the depencies I needed.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token literal-property property">modules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'Core'</span><span class="token punctuation">,</span> <span class="token string">'Gui'</span><span class="token punctuation">,</span> <span class="token string">'Widgets'</span><span class="token punctuation">,</span> <span class="token string">'Svg'</span><span class="token punctuation">,</span> <span class="token string">'Qml'</span><span class="token punctuation">,</span> <span class="token string">'QmlModels'</span><span class="token punctuation">,</span>
+    <span class="token string">'QuickLayouts'</span><span class="token punctuation">,</span> <span class="token string">'QuickTemplates2'</span><span class="token punctuation">,</span> <span class="token string">'QmlWorkerScript'</span><span class="token punctuation">,</span>
+    <span class="token string">'Quick'</span><span class="token punctuation">,</span> <span class="token string">'QuickControls2'</span><span class="token punctuation">,</span> <span class="token string">'ShaderTools'</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span></code></pre>
+<p>After compiling my VLC would break everytime I ran my extension which is the whole point of my project. The problem was packages were outaded so my choices were go ubuntu 24.10 or install QT from source. I ended up choosing the former.</p>
+<h2 id="second-week-writting-tests" tabindex="-1">Second Week; Writting Tests <a class="header-anchor" href="#second-week-writting-tests">#</a></h2>
 
-	
-	<li><a href="/tags/c/" class="post-tag">C</a></li>
-
-	
-	<li><a href="/tags/lua/" class="post-tag">Lua</a></li>
-
-	
-	<li><a href="/tags/linear-algebra/" class="post-tag">linear algebra</a></li>
-
-	
-	<li><a href="/tags/projects/" class="post-tag">projects</a></li>
-
-</ul>
-
+			<ul class="links-nextprev">
+					<li>Next: <a href="/blog/svd-image-compression/">Singular Value Decomposition and it&#39;s use in Image compression.</a>
+					</li>
+				
+			</ul>
+</div>
 		</main>
 
 		<footer></footer>
@@ -394,6 +562,6 @@ h2 + .header-anchor {
 			
 		</script>
 
-		<!-- Current page: /tags/ -->
+		<!-- Current page: /blog/gsoc/gosc-6-22/ -->
 	</body>
 </html>

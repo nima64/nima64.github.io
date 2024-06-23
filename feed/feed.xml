@@ -4,7 +4,7 @@
 	<subtitle>blog about math and computer science</subtitle>
 	<link href="https://example.com/feed/feed.xml" rel="self"/>
 	<link href="https://example.com/"/>
-	<updated>2024-04-20T18:32:09Z</updated>
+	<updated>2024-06-23T03:28:59Z</updated>
 	<id>https://example.com/</id>
 	<author>
 		<name>nyima tamang</name>
@@ -14,7 +14,7 @@
 	<entry>
 		<title>Singular Value Decomposition and it&#39;s use in Image compression.</title>
 		<link href="https://example.com/blog/svd-image-compression/"/>
-		<updated>2024-04-20T18:32:09Z</updated>
+		<updated>2024-06-23T03:28:59Z</updated>
 		<id>https://example.com/blog/svd-image-compression/</id>
 		<content type="html">&lt;p&gt;While reading through Strang&#39;s &lt;em&gt;Linear Algebra and It&#39;s Applications&lt;/em&gt; I came upon this passage about SVD and one of it&#39;s many applications image compression.&lt;/p&gt;
 &lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/_Z8w6LZVpo-1584.avif 1584w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/_Z8w6LZVpo-1584.webp 1584w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/_Z8w6LZVpo-1584.png&quot; width=&quot;1584&quot; height=&quot;926&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
@@ -104,6 +104,27 @@
 &lt;p&gt;The image was converted gray scale for the sake of simplicity, for color you need to run SVD on all the channels.&lt;/p&gt;
 &lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/mHUjXZAPLB-512.avif 512w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/mHUjXZAPLB-512.webp 512w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/mHUjXZAPLB-512.png&quot; width=&quot;512&quot; height=&quot;512&quot;&gt;&lt;/picture&gt;
 &lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/nQqlggC60c-512.avif 512w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/nQqlggC60c-512.webp 512w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/nQqlggC60c-512.png&quot; width=&quot;512&quot; height=&quot;512&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>First 3 Weeks of summer of code with VLC player</title>
+		<link href="https://example.com/blog/gsoc/gosc-6-22/"/>
+		<updated>2024-06-23T03:28:59Z</updated>
+		<id>https://example.com/blog/gsoc/gosc-6-22/</id>
+		<content type="html">&lt;h2 id=&quot;first-week-building-vlc&quot; tabindex=&quot;-1&quot;&gt;First Week; Building VLC &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;With the current repo of vlc player located in their &lt;a href=&quot;https://code.videolan.org/videolan/vlc/&quot;&gt;gitlab&lt;/a&gt; they have two build systems &lt;strong&gt;meson&lt;/strong&gt; and &lt;strong&gt;gnu autotools&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The main advantage with meson is the ninja builds it produces which are &lt;em&gt;super&lt;/em&gt; fast, autotools is much slower but you they allow you to easily disable and enable dependcies the cli. And currently meson build doesn&#39;t work for macos.&lt;/p&gt;
+&lt;p&gt;I ended up to picking meson that it produces a compile_commands.json needed for clangd lang server.&lt;/p&gt;
+&lt;p&gt;Some big problems I ran into was finding the right packages, alot of the times it I would install the package but it wouldn&#39;t register because pkg-conf couldn&#39;t find it. So I made sure installed either lib or dev packages.&lt;/p&gt;
+&lt;p&gt;I found myself in a rut tyring to find the right packages for QT because the script would say I would was missing one of out of the 5 QT packages and I didn&#39;t know which one it was. How I ended up find the right packages was by looking at &lt;strong&gt;vlc/modules/gui/qt/meson.build&lt;/strong&gt; which contains all the depencies I needed.&lt;/p&gt;
+&lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&#39;Core&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Gui&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Widgets&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Svg&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Qml&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QmlModels&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&#39;QuickLayouts&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QuickTemplates2&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QmlWorkerScript&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&#39;Quick&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QuickControls2&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;ShaderTools&#39;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After compiling my VLC would break everytime I ran my extension which is the whole point of my project. The problem was packages were outaded so my choices were go ubuntu 24.10 or install QT from source. I ended up choosing the former.&lt;/p&gt;
+&lt;h2 id=&quot;second-week-writting-tests&quot; tabindex=&quot;-1&quot;&gt;Second Week; Writting Tests &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 </content>
 	</entry>
 </feed>

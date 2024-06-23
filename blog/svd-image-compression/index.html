@@ -512,22 +512,24 @@ h2 + .header-anchor {
 		</header>
 
 		<main class="container-md mx-auto " id="skip">
-			<div style="max-width: 40em">
+			<div class="mx-auto" style="max-width: 40em">
 	
+	<img style="max-height: 300px;width: auto;" src=>
 	<h1>Singular Value Decomposition and it&#39;s use in Image compression.</h1>
-
 	<ul class="post-metadata">
 		<li>
-			<time datetime="2024-04-20">20 April 2024</time>
+			<time datetime="2024-06-23">23 June 2024</time>
 		</li>
 			<li>
 				<a href="/tags/linear-algebra/" class="post-tag">linear algebra</a>
 			</li>
 	</ul>
-
-	
-
-​<p>While reading through Strang's <em>Linear Algebra and It's Applications</em> I came upon this passage about SVD and one of it's many applications image compression.</p>
+<aside>
+  <nav class="toc" >
+        <ol><li><a href="#how-svd-compression-works">How SVD Compression Works</a></li><li><a href="#testing-it-in-code-with-stbi-and-eigen">Testing it in code with stbi and Eigen</a></li><li><a href="#the-result">The result</a></li></ol>
+      </nav>
+</aside>
+	​<p>While reading through Strang's <em>Linear Algebra and It's Applications</em> I came upon this passage about SVD and one of it's many applications image compression.</p>
 <p><picture><source type="image/avif" srcset="/img/_Z8w6LZVpo-1584.avif 1584w"><source type="image/webp" srcset="/img/_Z8w6LZVpo-1584.webp 1584w"><img alt="test" loading="lazy" decoding="async" src="/img/_Z8w6LZVpo-1584.png" width="1584" height="926"></picture></p>
 <p>SVD can be rewritten in a more compact form with the outer product being explicit.</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>r</mi></msubsup><msub><mi>σ</mi><mi>k</mi></msub><msub><mi>u</mi><mi>k</mi></msub><mo>⊗</mo><msub><mi>v</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\sum_{k=1}^{r}\sigma_{k}u_{k} \otimes v_{k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104em;vertical-align:-0.2997em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⊗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
@@ -616,6 +618,11 @@ h2 + .header-anchor {
 <p><picture><source type="image/avif" srcset="/img/mHUjXZAPLB-512.avif 512w"><source type="image/webp" srcset="/img/mHUjXZAPLB-512.webp 512w"><img alt="test" loading="lazy" decoding="async" src="/img/mHUjXZAPLB-512.png" width="512" height="512"></picture>
 <picture><source type="image/avif" srcset="/img/nQqlggC60c-512.avif 512w"><source type="image/webp" srcset="/img/nQqlggC60c-512.webp 512w"><img alt="test" loading="lazy" decoding="async" src="/img/nQqlggC60c-512.png" width="512" height="512"></picture></p>
 
+			<ul class="links-nextprev">
+					<li>Previous: <a href="/blog/gsoc/gosc-6-22/">First 3 Weeks of summer of code with VLC player</a>
+					</li>
+				
+			</ul>
 </div>
 		</main>
 
