@@ -3,61 +3,61 @@
 	
 	<url>
 		<loc>https://example.com/about/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/blog/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/blog/gsoc/gosc-6-22/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/blog/svd-image-compression/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/projects/study-budy/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/projects/</loc>
-		<lastmod>2024-06-23</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://example.com/tags/gsoc/</loc>
-		<lastmod>2024-06-23</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://example.com/tags/c/</loc>
-		<lastmod>2024-06-23</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://example.com/tags/lua/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://example.com/tags/linear-algebra/</loc>
-		<lastmod>2024-06-23</lastmod>
+		<lastmod>2024-08-04</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://example.com/tags/gsoc/</loc>
+		<lastmod>2024-08-04</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://example.com/tags/c/</loc>
+		<lastmod>2024-08-04</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://example.com/tags/lua/</loc>
+		<lastmod>2024-08-04</lastmod>
 	</url>
 </urlset>
