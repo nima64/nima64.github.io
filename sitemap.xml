@@ -37,11 +37,6 @@
 	</url>
 	
 	<url>
-		<loc>https://example.com/tags/linear-algebra/</loc>
-		<lastmod>2024-08-08</lastmod>
-	</url>
-	
-	<url>
 		<loc>https://example.com/tags/projects/</loc>
 		<lastmod>2024-08-08</lastmod>
 	</url>
@@ -58,6 +53,11 @@
 	
 	<url>
 		<loc>https://example.com/tags/lua/</loc>
+		<lastmod>2024-08-08</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://example.com/tags/linear-algebra/</loc>
 		<lastmod>2024-08-08</lastmod>
 	</url>
 </urlset>
