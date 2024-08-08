@@ -5,7 +5,8 @@ layout: layouts/base.njk
 	{# Only include the syntax highlighter CSS on blog posts #}
 	{%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
 	{%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
-	<img style="max-height: 300px;width: auto;" src={{image}}>
+
+	<img style="max-height: 300px;width: auto;" src={{bannerImage}}>
 	<h1>{{ title }}</h1>
 	<ul class="post-metadata">
 		<li>
