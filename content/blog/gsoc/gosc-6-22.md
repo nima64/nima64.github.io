@@ -1,7 +1,7 @@
 ---
 title: Summer of code with Video Lan
 description: 
-date: Created
+date: 2024-06-01
 bannerImage: '/img/VLC-logo.jpg'
 tags:
   - GSOC
@@ -18,6 +18,9 @@ I ended up choosing meson because it generates a ninja builds which is significa
 A blocking point in building vlc was finding the right the packages. Specifically qt packages which sometimes couldn't be recognized by pkg-conf. Eventually I found the packages from Ubuntu 21.10 worked, alternatively I could have built QT from source. I wasn't comfortable building QT, so I stuck with the latter.
 
 I found the correct packages to install from the looking at the QT build decencies in *vlc/modules/gui/qt/meson.build*. I would also look in vlc's docker images for finding linux dependencies.
+
+> Note: to generate a compile_commands on autoools install bear.  
+> And run `bear -- make`
 
 ```js
 modules: [
