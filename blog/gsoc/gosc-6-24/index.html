@@ -537,16 +537,23 @@ h2 + .header-anchor {
 	</ul>
 <aside>
   <nav class="toc" >
-        <ol><li><a href="#building-vlc">Building VLC</a></li><li><a href="#comprehending-the-code-base">Comprehending the code base</a></li><li><a href="#vlc-extension-system">VLC Extension System</a></li><li><a href="#tests">Tests</a></li><li><a href="#auto-run-module">Auto run Module</a></li></ol>
+        <ol><li><a href="#overview-of-the-code">Overview of the Code</a></li><li><a href="#background">Background</a><ol><li><a href="#building-vlc">Building VLC</a></li><li><a href="#comprehending-the-code-base">Comprehending the code base</a></li><li><a href="#vlc-extension-system">VLC Extension System</a></li></ol></li><li><a href="#what-i-did">What I did</a><ol><li><a href="#removing-cmd-set-input">Removing CMD_SET_INPUT</a></li><li><a href="#adding-missing-testing">Adding missing Testing</a></li><li><a href="#auto-run-feature">Auto-run feature</a></li></ol></li><li><a href="#conclusion">Conclusion</a></li></ol>
       </nav>
 </aside>
-	​<h2 id="building-vlc" tabindex="-1">Building VLC <a class="header-anchor" href="#building-vlc">#</a></h2>
+	​<h2 id="overview-of-the-code" tabindex="-1">Overview of the Code <a class="header-anchor" href="#overview-of-the-code">#</a></h2>
+<p><a href="https://github.com/thebamby/vlc-SmartLoad/pull/1">Updated SmartLoad extension to support VLC 4.0</a><br>
+<a href="https://code.videolan.org/nima64/vlc/-/tree/autorun-module?ref_type=heads">Auto-run branch</a><br>
+<a href="https://code.videolan.org/nima64/vlc/-/tree/tests-improvements?ref_type=heads">Test improvements branch</a><br>
+<a href="https://code.videolan.org/nima64/vlc/-/tree/CMD_SET_INPUT-removal?ref_type=heads">Remove traces of CMD_SET_INPUT branch</a><br>
+<a href="https://code.videolan.org/nima64/vlc/-/commit/cb2244b6f81d5c38e9aaddaf83aee09cd0905693">Fixed Meta_Changed function from segfaulting branch</a></p>
+<h2 id="background" tabindex="-1">Background <a class="header-anchor" href="#background">#</a></h2>
+<h3 id="building-vlc" tabindex="-1">Building VLC <a class="header-anchor" href="#building-vlc">#</a></h3>
 <p>The latest repo is on <a href="https://code.videolan.org/videolan/vlc/">gitlab</a> they have two build systems <strong>meson</strong> and <strong>gnu autotools</strong>.</p>
 <p>I ended up choosing meson because it generates a ninja builds which is significantly faster on my system than auto tools. Ninja also produces a compile_commands.json which is need for clangd setup.</p>
 <p>A blocking point in building vlc was finding the right the packages. Specifically qt packages which sometimes couldn't be recognized by pkg-conf. Eventually I found the packages from Ubuntu 21.10 worked, alternatively I could have built QT from source. I wasn't comfortable building QT, so I stuck with the latter.</p>
 <p>I found the correct packages to install from the looking at the QT build decencies in <em>vlc/modules/gui/qt/meson.build</em>. I would also look in vlc's docker images for finding linux dependencies.</p>
 <blockquote>
-<p>Note: to generate a compile_commands on autoools install bear.<br>
+<p>Note: to generate a compile_commands.json on autoools use bear.<br>
 And run <code>bear -- make</code></p>
 </blockquote>
 <pre class="language-js" tabindex="0"><code class="language-js"><span class="token literal-property property">modules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -554,20 +561,23 @@ And run <code>bear -- make</code></p>
     <span class="token string">'QuickLayouts'</span><span class="token punctuation">,</span> <span class="token string">'QuickTemplates2'</span><span class="token punctuation">,</span> <span class="token string">'QmlWorkerScript'</span><span class="token punctuation">,</span>
     <span class="token string">'Quick'</span><span class="token punctuation">,</span> <span class="token string">'QuickControls2'</span><span class="token punctuation">,</span> <span class="token string">'ShaderTools'</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span></code></pre>
-<h2 id="comprehending-the-code-base" tabindex="-1">Comprehending the code base <a class="header-anchor" href="#comprehending-the-code-base">#</a></h2>
+<h3 id="comprehending-the-code-base" tabindex="-1">Comprehending the code base <a class="header-anchor" href="#comprehending-the-code-base">#</a></h3>
 <p>Some useful resources<br>
 <a href="">https://wiki.videolan.org/Hacker_Guide/</a><br>
 <a href="">https://mfkl.gumroad.com/l/libvlc-good-parts</a><br>
 <a href="">https://www.doxygen.nl/manual/</a></p>
 <p>I would recommend compiling your own documentation for source graphs. There are libvlc and libvlccore doxygen documentation online, but that didn't include any of the extensions system.</p>
-<h2 id="vlc-extension-system" tabindex="-1">VLC Extension System <a class="header-anchor" href="#vlc-extension-system">#</a></h2>
+<h3 id="vlc-extension-system" tabindex="-1">VLC Extension System <a class="header-anchor" href="#vlc-extension-system">#</a></h3>
 <p>Since my project is based around the lua extension system I will attempt to explain and show how it works in a brief paragraph.</p>
-<p>The key part in the extension system that controls the communication between vlc and extension code is the extension manager.
+<p>The key part in the extension system that controls the communication between vlc and extension code is the <em>extension manager</em>.
 The extension manager holds all the extension data and contains a function, called control, which is the api that will handle commands. The function gets passed different command enums such as activate, deactivate, is_active... etc. And how the commands get handled is dependant your implementation.</p>
 <p>The implementation from the lua module says that commands will get pushed onto queue. And on separate thread &quot;extension thread&quot; will execute commands and trigger a function in the lua code.
-<picture><source type="image/avif" srcset="/img/2e30K7ILjO-1634.avif 1634w"><source type="image/webp" srcset="/img/2e30K7ILjO-1634.webp 1634w"><img alt="test" loading="lazy" decoding="async" src="/img/2e30K7ILjO-1634.png" width="1634" height="618"></picture></p>
-<h2 id="tests" tabindex="-1">Tests <a class="header-anchor" href="#tests">#</a></h2>
-<p>One of the goals for my project is to create tests for the extension commands. Only playing_changed had been done the rest needed to be implemented. Testing each command is just checking if the callback in the lua code got executed. The is achieved through blocking our main thread with a semaphore until the lua callback is called, from a separate thread, signals to unblock the code.</p>
+<picture><source type="image/avif" srcset="/img/QdVW8DtiSD-2752.avif 2752w"><source type="image/webp" srcset="/img/QdVW8DtiSD-2752.webp 2752w"><img alt="test" loading="lazy" decoding="async" src="/img/QdVW8DtiSD-2752.jpeg" width="2752" height="1040"></picture></p>
+<h2 id="what-i-did" tabindex="-1">What I did <a class="header-anchor" href="#what-i-did">#</a></h2>
+<h3 id="removing-cmd-set-input" tabindex="-1">Removing CMD_SET_INPUT <a class="header-anchor" href="#removing-cmd-set-input">#</a></h3>
+<h3 id="adding-missing-testing" tabindex="-1">Adding missing Testing <a class="header-anchor" href="#adding-missing-testing">#</a></h3>
+<p><a href="https://code.videolan.org/nima64/vlc/-/compare/master...tests-improvements?from_project_id=435">Test improvements branch</a></p>
+<p>One of the goals for my project is to create tests for the extension commands. Only playing_changed had been done the rest needed to be implemented. Testing each command is just checking if the callback in the lua code got executed. The is achieved through blocking our main thread with a semaphore until the lua callback is triggered, from extension thread, signals to unblock the code.</p>
 <pre class="language-c" tabindex="0"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">enum</span>
 <span class="token punctuation">{</span>
     CMD_ACTIVATE <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
@@ -580,10 +590,29 @@ The extension manager holds all the extension data and contains a function, call
     CMD_PLAYING_CHANGED <span class="token comment">/* Arg1 = int*, New playing status  */</span>
 <span class="token punctuation">}</span> command_type_e<span class="token punctuation">;</span>
 </code></pre>
-<h2 id="auto-run-module" tabindex="-1">Auto run Module <a class="header-anchor" href="#auto-run-module">#</a></h2>
+<h3 id="auto-run-feature" tabindex="-1">Auto-run feature <a class="header-anchor" href="#auto-run-feature">#</a></h3>
+<p><a href="https://code.videolan.org/videolan/vlc/-/merge_requests/5795/commits#note_448656">Auto-run Merge Request</a></p>
+<p>In VLC extensions will only run on startup if you click activate unlike chrome extensions which run in the background once you've installed them. This auto running feature has been in the discussion for a <a href="https://code.videolan.org/videolan/vlc/-/issues/3883">while now</a>.</p>
+<p>There are a myriad of security issues that can arise from this feature since extensions aren't on a separate process or have a proper permission system. That can cause unintended crashes and malicious attacks by the extension.<br>
+The solution we came up with is making the feature optional for the user by making it an interface. So if the user wants auto running extensions they must use the interface.<br>
+Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.</p>
+<p>Currently the new AutorunStart function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.</p>
+<p>Future Work</p>
+<ul>
+<li>
+<p>AutorunStart should create marked extension threads and enabled them.</p>
+</li>
+<li>
+<p>Extension thread should also be stopped by the last module using the state shared_ptr.</p>
+</li>
+</ul>
+<p><picture><source type="image/avif" srcset="/img/lWwuuRp4Up-2918.avif 2918w"><source type="image/webp" srcset="/img/lWwuuRp4Up-2918.webp 2918w"><img alt="test" loading="lazy" decoding="async" src="/img/lWwuuRp4Up-2918.jpeg" width="2918" height="2207"></picture></p>
+<h2 id="conclusion" tabindex="-1">Conclusion <a class="header-anchor" href="#conclusion">#</a></h2>
+<p>When I was freelancing couple years ago I worked on a project making a VLC extension for some movie producer. A lot of the documentation had been dated, so I was left to dig up the code base. Back then I didn't know a lick of C and always wondered how VLC worked under the hood. Now I know parts of it :) and I had alot of fun coding this summer.<br>
+Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, and being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.</p>
 
 			<ul class="links-nextprev">
-					<li>Next: <a href="/blog/svd-image-compression/">Singular Value Decomposition and it&#39;s use in Image compression.</a>
+					<li>Previous: <a href="/blog/svd-image-compression/">Singular Value Decomposition and it&#39;s use in Image compression.</a>
 					</li>
 				
 			</ul>
@@ -595,6 +624,6 @@ The extension manager holds all the extension data and contains a function, call
 			
 		</script>
 
-		<!-- Current page: /blog/gsoc/gosc-6-22/ -->
+		<!-- Current page: /blog/gsoc/gosc-6-24/ -->
 	</body>
 </html>

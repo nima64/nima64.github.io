@@ -4,7 +4,7 @@
 	<subtitle>blog about math and computer science</subtitle>
 	<link href="https://example.com/feed/feed.xml" rel="self"/>
 	<link href="https://example.com/"/>
-	<updated>2024-08-09T06:35:54Z</updated>
+	<updated>2024-06-01T00:00:00Z</updated>
 	<id>https://example.com/</id>
 	<author>
 		<name>nyima tamang</name>
@@ -12,9 +12,87 @@
 	</author>
 	
 	<entry>
+		<title>Summer of code with Video Lan</title>
+		<link href="https://example.com/blog/gsoc/gosc-6-24/"/>
+		<updated>2024-06-01T00:00:00Z</updated>
+		<id>https://example.com/blog/gsoc/gosc-6-24/</id>
+		<content type="html">&lt;h2 id=&quot;overview-of-the-code&quot; tabindex=&quot;-1&quot;&gt;Overview of the Code &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/thebamby/vlc-SmartLoad/pull/1&quot;&gt;Updated SmartLoad extension to support VLC 4.0&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://code.videolan.org/nima64/vlc/-/tree/autorun-module?ref_type=heads&quot;&gt;Auto-run branch&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://code.videolan.org/nima64/vlc/-/tree/tests-improvements?ref_type=heads&quot;&gt;Test improvements branch&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://code.videolan.org/nima64/vlc/-/tree/CMD_SET_INPUT-removal?ref_type=heads&quot;&gt;Remove traces of CMD_SET_INPUT branch&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://code.videolan.org/nima64/vlc/-/commit/cb2244b6f81d5c38e9aaddaf83aee09cd0905693&quot;&gt;Fixed Meta_Changed function from segfaulting branch&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;background&quot; tabindex=&quot;-1&quot;&gt;Background &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;building-vlc&quot; tabindex=&quot;-1&quot;&gt;Building VLC &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The latest repo is on &lt;a href=&quot;https://code.videolan.org/videolan/vlc/&quot;&gt;gitlab&lt;/a&gt; they have two build systems &lt;strong&gt;meson&lt;/strong&gt; and &lt;strong&gt;gnu autotools&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;I ended up choosing meson because it generates a ninja builds which is significantly faster on my system than auto tools. Ninja also produces a compile_commands.json which is need for clangd setup.&lt;/p&gt;
+&lt;p&gt;A blocking point in building vlc was finding the right the packages. Specifically qt packages which sometimes couldn&#39;t be recognized by pkg-conf. Eventually I found the packages from Ubuntu 21.10 worked, alternatively I could have built QT from source. I wasn&#39;t comfortable building QT, so I stuck with the latter.&lt;/p&gt;
+&lt;p&gt;I found the correct packages to install from the looking at the QT build decencies in &lt;em&gt;vlc/modules/gui/qt/meson.build&lt;/em&gt;. I would also look in vlc&#39;s docker images for finding linux dependencies.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: to generate a compile_commands.json on autoools use bear.&lt;br&gt;
+And run &lt;code&gt;bear -- make&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&#39;Core&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Gui&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Widgets&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Svg&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Qml&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QmlModels&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&#39;QuickLayouts&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QuickTemplates2&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QmlWorkerScript&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&#39;Quick&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QuickControls2&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;ShaderTools&#39;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;comprehending-the-code-base&quot; tabindex=&quot;-1&quot;&gt;Comprehending the code base &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Some useful resources&lt;br&gt;
+&lt;a href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;https://wiki.videolan.org/Hacker_Guide/&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;https://mfkl.gumroad.com/l/libvlc-good-parts&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;https://www.doxygen.nl/manual/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I would recommend compiling your own documentation for source graphs. There are libvlc and libvlccore doxygen documentation online, but that didn&#39;t include any of the extensions system.&lt;/p&gt;
+&lt;h3 id=&quot;vlc-extension-system&quot; tabindex=&quot;-1&quot;&gt;VLC Extension System &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Since my project is based around the lua extension system I will attempt to explain and show how it works in a brief paragraph.&lt;/p&gt;
+&lt;p&gt;The key part in the extension system that controls the communication between vlc and extension code is the &lt;em&gt;extension manager&lt;/em&gt;.
+The extension manager holds all the extension data and contains a function, called control, which is the api that will handle commands. The function gets passed different command enums such as activate, deactivate, is_active... etc. And how the commands get handled is dependant your implementation.&lt;/p&gt;
+&lt;p&gt;The implementation from the lua module says that commands will get pushed onto queue. And on separate thread &amp;quot;extension thread&amp;quot; will execute commands and trigger a function in the lua code.
+&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/QdVW8DtiSD-2752.avif 2752w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/QdVW8DtiSD-2752.webp 2752w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/QdVW8DtiSD-2752.jpeg&quot; width=&quot;2752&quot; height=&quot;1040&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;h2 id=&quot;what-i-did&quot; tabindex=&quot;-1&quot;&gt;What I did &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;removing-cmd-set-input&quot; tabindex=&quot;-1&quot;&gt;Removing CMD_SET_INPUT &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;adding-missing-testing&quot; tabindex=&quot;-1&quot;&gt;Adding missing Testing &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://code.videolan.org/nima64/vlc/-/compare/master...tests-improvements?from_project_id=435&quot;&gt;Test improvements branch&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;One of the goals for my project is to create tests for the extension commands. Only playing_changed had been done the rest needed to be implemented. Testing each command is just checking if the callback in the lua code got executed. The is achieved through blocking our main thread with a semaphore until the lua callback is triggered, from extension thread, signals to unblock the code.&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;enum&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    CMD_ACTIVATE &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    CMD_DEACTIVATE&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    CMD_TRIGGERMENU&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;    &lt;span class=&quot;token comment&quot;&gt;/* Arg1 = int*, pointing to id to trigger. free */&lt;/span&gt;
+    CMD_CLICK&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;          &lt;span class=&quot;token comment&quot;&gt;/* Arg1 = extension_widget_t* */&lt;/span&gt;
+    CMD_CLOSE&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    CMD_SET_INPUT&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;      &lt;span class=&quot;token comment&quot;&gt;/* No arg. Just signal current input changed */&lt;/span&gt;
+    CMD_UPDATE_META&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;    &lt;span class=&quot;token comment&quot;&gt;/* No arg. Just signal current input item meta changed */&lt;/span&gt;
+    CMD_PLAYING_CHANGED &lt;span class=&quot;token comment&quot;&gt;/* Arg1 = int*, New playing status  */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; command_type_e&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;auto-run-feature&quot; tabindex=&quot;-1&quot;&gt;Auto-run feature &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/vlc/-/merge_requests/5795/commits#note_448656&quot;&gt;Auto-run Merge Request&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In VLC extensions will only run on startup if you click activate unlike chrome extensions which run in the background once you&#39;ve installed them. This auto running feature has been in the discussion for a &lt;a href=&quot;https://code.videolan.org/videolan/vlc/-/issues/3883&quot;&gt;while now&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are a myriad of security issues that can arise from this feature since extensions aren&#39;t on a separate process or have a proper permission system. That can cause unintended crashes and malicious attacks by the extension.&lt;br&gt;
+The solution we came up with is making the feature optional for the user by making it an interface. So if the user wants auto running extensions they must use the interface.&lt;br&gt;
+Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.&lt;/p&gt;
+&lt;p&gt;Currently the new AutorunStart function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.&lt;/p&gt;
+&lt;p&gt;Future Work&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AutorunStart should create marked extension threads and enabled them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Extension thread should also be stopped by the last module using the state shared_ptr.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.avif 2918w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.webp 2918w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/lWwuuRp4Up-2918.jpeg&quot; width=&quot;2918&quot; height=&quot;2207&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When I was freelancing couple years ago I worked on a project making a VLC extension for some movie producer. A lot of the documentation had been dated, so I was left to dig up the code base. Back then I didn&#39;t know a lick of C and always wondered how VLC worked under the hood. Now I know parts of it :) and I had alot of fun coding this summer.&lt;br&gt;
+Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, and being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
 		<title>Singular Value Decomposition and it&#39;s use in Image compression.</title>
 		<link href="https://example.com/blog/svd-image-compression/"/>
-		<updated>2024-08-09T06:35:54Z</updated>
+		<updated>2023-12-01T00:00:00Z</updated>
 		<id>https://example.com/blog/svd-image-compression/</id>
 		<content type="html">&lt;p&gt;While reading through Strang&#39;s &lt;em&gt;Linear Algebra and It&#39;s Applications&lt;/em&gt; I came upon this passage about SVD and one of it&#39;s many applications image compression.&lt;/p&gt;
 &lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/_Z8w6LZVpo-1584.avif 1584w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/_Z8w6LZVpo-1584.webp 1584w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/_Z8w6LZVpo-1584.png&quot; width=&quot;1584&quot; height=&quot;926&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
@@ -104,55 +182,6 @@
 &lt;p&gt;The image was converted gray scale for the sake of simplicity, for color you need to run SVD on all the channels.&lt;/p&gt;
 &lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/mHUjXZAPLB-512.avif 512w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/mHUjXZAPLB-512.webp 512w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/mHUjXZAPLB-512.png&quot; width=&quot;512&quot; height=&quot;512&quot;&gt;&lt;/picture&gt;
 &lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/nQqlggC60c-512.avif 512w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/nQqlggC60c-512.webp 512w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/nQqlggC60c-512.png&quot; width=&quot;512&quot; height=&quot;512&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>Summer of code with Video Lan</title>
-		<link href="https://example.com/blog/gsoc/gosc-6-22/"/>
-		<updated>2024-06-01T00:00:00Z</updated>
-		<id>https://example.com/blog/gsoc/gosc-6-22/</id>
-		<content type="html">&lt;h2 id=&quot;building-vlc&quot; tabindex=&quot;-1&quot;&gt;Building VLC &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The latest repo is on &lt;a href=&quot;https://code.videolan.org/videolan/vlc/&quot;&gt;gitlab&lt;/a&gt; they have two build systems &lt;strong&gt;meson&lt;/strong&gt; and &lt;strong&gt;gnu autotools&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;I ended up choosing meson because it generates a ninja builds which is significantly faster on my system than auto tools. Ninja also produces a compile_commands.json which is need for clangd setup.&lt;/p&gt;
-&lt;p&gt;A blocking point in building vlc was finding the right the packages. Specifically qt packages which sometimes couldn&#39;t be recognized by pkg-conf. Eventually I found the packages from Ubuntu 21.10 worked, alternatively I could have built QT from source. I wasn&#39;t comfortable building QT, so I stuck with the latter.&lt;/p&gt;
-&lt;p&gt;I found the correct packages to install from the looking at the QT build decencies in &lt;em&gt;vlc/modules/gui/qt/meson.build&lt;/em&gt;. I would also look in vlc&#39;s docker images for finding linux dependencies.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: to generate a compile_commands on autoools install bear.&lt;br&gt;
-And run &lt;code&gt;bear -- make&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;token string&quot;&gt;&#39;Core&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Gui&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Widgets&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Svg&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Qml&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QmlModels&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token string&quot;&gt;&#39;QuickLayouts&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QuickTemplates2&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QmlWorkerScript&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token string&quot;&gt;&#39;Quick&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;QuickControls2&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;ShaderTools&#39;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;comprehending-the-code-base&quot; tabindex=&quot;-1&quot;&gt;Comprehending the code base &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Some useful resources&lt;br&gt;
-&lt;a href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;https://wiki.videolan.org/Hacker_Guide/&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;https://mfkl.gumroad.com/l/libvlc-good-parts&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;https://www.doxygen.nl/manual/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I would recommend compiling your own documentation for source graphs. There are libvlc and libvlccore doxygen documentation online, but that didn&#39;t include any of the extensions system.&lt;/p&gt;
-&lt;h2 id=&quot;vlc-extension-system&quot; tabindex=&quot;-1&quot;&gt;VLC Extension System &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Since my project is based around the lua extension system I will attempt to explain and show how it works in a brief paragraph.&lt;/p&gt;
-&lt;p&gt;The key part in the extension system that controls the communication between vlc and extension code is the extension manager.
-The extension manager holds all the extension data and contains a function, called control, which is the api that will handle commands. The function gets passed different command enums such as activate, deactivate, is_active... etc. And how the commands get handled is dependant your implementation.&lt;/p&gt;
-&lt;p&gt;The implementation from the lua module says that commands will get pushed onto queue. And on separate thread &amp;quot;extension thread&amp;quot; will execute commands and trigger a function in the lua code.
-&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/2e30K7ILjO-1634.avif 1634w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/2e30K7ILjO-1634.webp 1634w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/2e30K7ILjO-1634.png&quot; width=&quot;1634&quot; height=&quot;618&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;h2 id=&quot;tests&quot; tabindex=&quot;-1&quot;&gt;Tests &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;One of the goals for my project is to create tests for the extension commands. Only playing_changed had been done the rest needed to be implemented. Testing each command is just checking if the callback in the lua code got executed. The is achieved through blocking our main thread with a semaphore until the lua callback is called, from a separate thread, signals to unblock the code.&lt;/p&gt;
-&lt;pre class=&quot;language-c&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;enum&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    CMD_ACTIVATE &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    CMD_DEACTIVATE&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    CMD_TRIGGERMENU&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;    &lt;span class=&quot;token comment&quot;&gt;/* Arg1 = int*, pointing to id to trigger. free */&lt;/span&gt;
-    CMD_CLICK&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;          &lt;span class=&quot;token comment&quot;&gt;/* Arg1 = extension_widget_t* */&lt;/span&gt;
-    CMD_CLOSE&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    CMD_SET_INPUT&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;      &lt;span class=&quot;token comment&quot;&gt;/* No arg. Just signal current input changed */&lt;/span&gt;
-    CMD_UPDATE_META&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;    &lt;span class=&quot;token comment&quot;&gt;/* No arg. Just signal current input item meta changed */&lt;/span&gt;
-    CMD_PLAYING_CHANGED &lt;span class=&quot;token comment&quot;&gt;/* Arg1 = int*, New playing status  */&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; command_type_e&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;auto-run-module&quot; tabindex=&quot;-1&quot;&gt;Auto run Module &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-22/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 </content>
 	</entry>
 </feed>
