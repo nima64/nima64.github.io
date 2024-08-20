@@ -1,7 +1,7 @@
 ---
 title: Singular Value Decomposition and it's use in Image compression.
 description: Learning how to compress images in C++ using Eigen and stb image.
-date: Created
+date: 2023-12-01
 tags:
   - linear algebra
 ---
