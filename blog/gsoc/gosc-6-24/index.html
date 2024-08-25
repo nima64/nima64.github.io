@@ -575,6 +575,9 @@ The extension manager holds all the extension data and contains a function, call
 <picture><source type="image/avif" srcset="/img/QdVW8DtiSD-2752.avif 2752w"><source type="image/webp" srcset="/img/QdVW8DtiSD-2752.webp 2752w"><img alt="test" loading="lazy" decoding="async" src="/img/QdVW8DtiSD-2752.jpeg" width="2752" height="1040"></picture></p>
 <h2 id="what-i-did" tabindex="-1">What I did <a class="header-anchor" href="#what-i-did">#</a></h2>
 <h3 id="removing-cmd-set-input" tabindex="-1">Removing CMD_SET_INPUT <a class="header-anchor" href="#removing-cmd-set-input">#</a></h3>
+<p><a href="https://code.videolan.org/videolan/vlc/-/merge_requests/3240">my mentors work</a></p>
+<p><a href="https://code.videolan.org/nima64/vlc/-/tree/CMD_SET_INPUT-removal?ref_type=heads">Remove traces of CMD_SET_INPUT branch</a></p>
+<p>This was a continuation of my mentors work deprecating CMD_SET_INPUT signals through ui commands</p>
 <h3 id="adding-missing-testing" tabindex="-1">Adding missing Testing <a class="header-anchor" href="#adding-missing-testing">#</a></h3>
 <p><a href="https://code.videolan.org/nima64/vlc/-/compare/master...tests-improvements?from_project_id=435">Test improvements branch</a></p>
 <p>One of the goals for my project is to create tests for the extension commands. Only playing_changed had been done the rest needed to be implemented. Testing each command is just checking if the callback in the lua code got executed. The is achieved through blocking our main thread with a semaphore until the lua callback is triggered, from extension thread, signals to unblock the code.</p>
@@ -592,11 +595,8 @@ The extension manager holds all the extension data and contains a function, call
 </code></pre>
 <h3 id="auto-run-feature" tabindex="-1">Auto-run feature <a class="header-anchor" href="#auto-run-feature">#</a></h3>
 <p><a href="https://code.videolan.org/videolan/vlc/-/merge_requests/5795/commits#note_448656">Auto-run Merge Request</a></p>
-<p>In VLC extensions will only run on startup if you click activate unlike chrome extensions which run in the background once you've installed them. This auto running feature has been in the discussion for a <a href="https://code.videolan.org/videolan/vlc/-/issues/3883">while now</a>.</p>
-<p>There are a myriad of security issues that can arise from this feature since extensions aren't on a separate process or have a proper permission system. That can cause unintended crashes and malicious attacks by the extension.<br>
-The solution we came up with is making the feature optional for the user by making it an interface. So if the user wants auto running extensions they must use the interface.<br>
-Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.</p>
-<p>Currently the new AutorunStart function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.</p>
+<p>Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.
+Currently the new Autorun Start function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.</p>
 <p>Future Work</p>
 <ul>
 <li>
@@ -608,6 +608,7 @@ Ideally extensions should be isolated in their own process and have a proper per
 </ul>
 <p><picture><source type="image/avif" srcset="/img/lWwuuRp4Up-2918.avif 2918w"><source type="image/webp" srcset="/img/lWwuuRp4Up-2918.webp 2918w"><img alt="test" loading="lazy" decoding="async" src="/img/lWwuuRp4Up-2918.jpeg" width="2918" height="2207"></picture></p>
 <h2 id="conclusion" tabindex="-1">Conclusion <a class="header-anchor" href="#conclusion">#</a></h2>
+<p>The thing I struggled with the most is being a effective communicator and learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else's. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration. For complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.</p>
 <p>When I was freelancing couple years ago I worked on a project making a VLC extension for some movie producer. A lot of the documentation had been dated, so I was left to dig up the code base. Back then I didn't know a lick of C and always wondered how VLC worked under the hood. Now I know parts of it :) and I had alot of fun coding this summer.<br>
 Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, and being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.</p>
 
