@@ -63,6 +63,12 @@ The implementation from the lua module says that commands will get pushed onto q
 
 ### Removing CMD_SET_INPUT
 
+[my mentors work]( https://code.videolan.org/videolan/vlc/-/merge_requests/3240)
+
+[Remove traces of CMD_SET_INPUT branch](https://code.videolan.org/nima64/vlc/-/tree/CMD_SET_INPUT-removal?ref_type=heads)  
+
+This was a continuation of my mentors work deprecating CMD_SET_INPUT signals through ui commands
+
 ### Adding missing Testing
 
 [Test improvements branch](https://code.videolan.org/nima64/vlc/-/compare/master...tests-improvements?from_project_id=435)
@@ -88,13 +94,8 @@ typedef enum
 
 [Auto-run Merge Request](https://code.videolan.org/videolan/vlc/-/merge_requests/5795/commits#note_448656)  
 
-In VLC extensions will only run on startup if you click activate unlike chrome extensions which run in the background once you've installed them. This auto running feature has been in the discussion for a [while now](https://code.videolan.org/videolan/vlc/-/issues/3883).
-
-There are a myriad of security issues that can arise from this feature since extensions aren't on a separate process or have a proper permission system. That can cause unintended crashes and malicious attacks by the extension.  
-The solution we came up with is making the feature optional for the user by making it an interface. So if the user wants auto running extensions they must use the interface.  
 Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.
-
-Currently the new AutorunStart function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.  
+Currently the new Autorun Start function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.  
 
 Future Work
 
@@ -106,6 +107,7 @@ Future Work
 
 ## Conclusion  
 
+The thing I struggled with the most is being a effective communicator and learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else's. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration. For complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.
+
 When I was freelancing couple years ago I worked on a project making a VLC extension for some movie producer. A lot of the documentation had been dated, so I was left to dig up the code base. Back then I didn't know a lick of C and always wondered how VLC worked under the hood. Now I know parts of it :) and I had alot of fun coding this summer.  
 Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, and being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.
-
