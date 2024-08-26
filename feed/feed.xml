@@ -74,7 +74,7 @@ The extension manager holds all the extension data and contains a function, call
 &lt;p&gt;Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.
 Currently the new Autorun Start function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.&lt;/p&gt;
 &lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.avif 2918w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.webp 2918w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/lWwuuRp4Up-2918.jpeg&quot; width=&quot;2918&quot; height=&quot;2207&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
-&lt;h2 id=&quot;future-work&quot; tabindex=&quot;-1&quot;&gt;Future Work &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Future Work&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;AutorunStart should create marked extension threads and enabled them.&lt;/p&gt;

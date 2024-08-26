@@ -537,7 +537,7 @@ h2 + .header-anchor {
 	</ul>
 <aside>
   <nav class="toc" >
-        <ol><li><a href="#overview-of-the-code">Overview of the Code</a></li><li><a href="#background">Background</a><ol><li><a href="#building-vlc">Building VLC</a></li><li><a href="#comprehending-the-code-base">Comprehending the code base</a></li><li><a href="#vlc-extension-system">VLC Extension System</a></li></ol></li><li><a href="#what-i-did">What I did</a><ol><li><a href="#removing-cmd-set-input">Removing CMD_SET_INPUT</a></li><li><a href="#adding-missing-testing">Adding missing Testing</a></li><li><a href="#auto-run-feature">Auto-run feature</a></li></ol></li><li><a href="#future-work">Future Work</a></li><li><a href="#hurdles-and-what-i-learned-from-them">Hurdles and What I learned From them</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+        <ol><li><a href="#overview-of-the-code">Overview of the Code</a></li><li><a href="#background">Background</a><ol><li><a href="#building-vlc">Building VLC</a></li><li><a href="#comprehending-the-code-base">Comprehending the code base</a></li><li><a href="#vlc-extension-system">VLC Extension System</a></li></ol></li><li><a href="#what-i-did">What I did</a><ol><li><a href="#removing-cmd-set-input">Removing CMD_SET_INPUT</a></li><li><a href="#adding-missing-testing">Adding missing Testing</a></li><li><a href="#auto-run-feature">Auto-run feature</a></li></ol></li><li><a href="#hurdles-and-what-i-learned-from-them">Hurdles and What I learned From them</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
       </nav>
 </aside>
 	​<h2 id="overview-of-the-code" tabindex="-1">Overview of the Code <a class="header-anchor" href="#overview-of-the-code">#</a></h2>
@@ -598,7 +598,7 @@ The extension manager holds all the extension data and contains a function, call
 <p>Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.
 Currently the new Autorun Start function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.</p>
 <p><picture><source type="image/avif" srcset="/img/lWwuuRp4Up-2918.avif 2918w"><source type="image/webp" srcset="/img/lWwuuRp4Up-2918.webp 2918w"><img alt="test" loading="lazy" decoding="async" src="/img/lWwuuRp4Up-2918.jpeg" width="2918" height="2207"></picture></p>
-<h2 id="future-work" tabindex="-1">Future Work <a class="header-anchor" href="#future-work">#</a></h2>
+<p>Future Work</p>
 <ul>
 <li>
 <p>AutorunStart should create marked extension threads and enabled them.</p>
