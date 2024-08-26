@@ -67,7 +67,7 @@ The implementation from the lua module says that commands will get pushed onto q
 
 [Remove traces of CMD_SET_INPUT branch](https://code.videolan.org/nima64/vlc/-/tree/CMD_SET_INPUT-removal?ref_type=heads)  
 
-This was a continuation of my mentors work deprecating CMD_SET_INPUT signals through ui commands
+This was a continuation of my mentors work deprecating CMD_SET_INPUT through ui commands, since it now gets binded to player's input changed event.
 
 ### Adding missing Testing
 
@@ -97,17 +97,25 @@ typedef enum
 Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.
 Currently the new Autorun Start function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.  
 
-Future Work
+{% image "./autorun-diagram.jpg" ,"test"%}
 
-- AutorunStart should create marked extension threads and enabled them. 
+## Future Work
+
+- AutorunStart should create marked extension threads and enabled them.
 
 - Extension thread should also be stopped by the last module using the state shared_ptr.
 
-{% image "./autorun-diagram.jpg" ,"test"%}
+## Hurdles and What I learned From them
+
+For large code bases make sure you understand the common code and libraries. For example in vlc how is oop implement, what are interfaces and modules.
+Don't focus on understanding what every line of code is doing, instead try to look at the big picture, what is this chunk of code doing?
+
+Ask questions, so you don't waste your time getting stuck on a problem for too long.
+
+Effective communication is incredibly important this is something I struggled with, learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else's. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration. For a complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.
 
 ## Conclusion  
 
-The thing I struggled with the most is being a effective communicator and learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else's. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration. For complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.
+I'm grateful to be able to partake in g'soc 24 with VLC. I was in awe of the inner workings of VLC. For the future I want to contribute more performance optimizations and low level related code like a video filter or adding the caching playlist probing.
 
-When I was freelancing couple years ago I worked on a project making a VLC extension for some movie producer. A lot of the documentation had been dated, so I was left to dig up the code base. Back then I didn't know a lick of C and always wondered how VLC worked under the hood. Now I know parts of it :) and I had alot of fun coding this summer.  
-Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, and being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.
+Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, for always being there to support me and answer my questions and overall being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.
