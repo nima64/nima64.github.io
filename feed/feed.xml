@@ -53,7 +53,7 @@ The extension manager holds all the extension data and contains a function, call
 &lt;h3 id=&quot;removing-cmd-set-input&quot; tabindex=&quot;-1&quot;&gt;Removing CMD_SET_INPUT &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/vlc/-/merge_requests/3240&quot;&gt;my mentors work&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://code.videolan.org/nima64/vlc/-/tree/CMD_SET_INPUT-removal?ref_type=heads&quot;&gt;Remove traces of CMD_SET_INPUT branch&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This was a continuation of my mentors work deprecating CMD_SET_INPUT signals through ui commands&lt;/p&gt;
+&lt;p&gt;This was a continuation of my mentors work deprecating CMD_SET_INPUT through ui commands, since it now gets binded to player&#39;s input changed event.&lt;/p&gt;
 &lt;h3 id=&quot;adding-missing-testing&quot; tabindex=&quot;-1&quot;&gt;Adding missing Testing &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://code.videolan.org/nima64/vlc/-/compare/master...tests-improvements?from_project_id=435&quot;&gt;Test improvements branch&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;One of the goals for my project is to create tests for the extension commands. Only playing_changed had been done the rest needed to be implemented. Testing each command is just checking if the callback in the lua code got executed. The is achieved through blocking our main thread with a semaphore until the lua callback is triggered, from extension thread, signals to unblock the code.&lt;/p&gt;
@@ -73,7 +73,8 @@ The extension manager holds all the extension data and contains a function, call
 &lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/vlc/-/merge_requests/5795/commits#note_448656&quot;&gt;Auto-run Merge Request&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Ideally extensions should be isolated in their own process and have a proper permission system which prompts the user when it uses features that are possible security risks like accessing the filesystem.
 Currently the new Autorun Start function is not 100% done, it loads the data and the starting of the new extension threads and enabling marked extensions is naively done through the extension manager.&lt;/p&gt;
-&lt;p&gt;Future Work&lt;/p&gt;
+&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.avif 2918w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.webp 2918w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/lWwuuRp4Up-2918.jpeg&quot; width=&quot;2918&quot; height=&quot;2207&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;h2 id=&quot;future-work&quot; tabindex=&quot;-1&quot;&gt;Future Work &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;AutorunStart should create marked extension threads and enabled them.&lt;/p&gt;
@@ -82,11 +83,14 @@ Currently the new Autorun Start function is not 100% done, it loads the data and
 &lt;p&gt;Extension thread should also be stopped by the last module using the state shared_ptr.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.avif 2918w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/img/lWwuuRp4Up-2918.webp 2918w&quot;&gt;&lt;img alt=&quot;test&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/img/lWwuuRp4Up-2918.jpeg&quot; width=&quot;2918&quot; height=&quot;2207&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;h2 id=&quot;hurdles-and-what-i-learned-from-them&quot; tabindex=&quot;-1&quot;&gt;Hurdles and What I learned From them &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;For large code bases make sure you understand the common code and libraries. For example in vlc how is oop implement, what are interfaces and modules.
+Don&#39;t focus on understanding what every line of code is doing, instead try to look at the big picture, what is this chunk of code doing?&lt;/p&gt;
+&lt;p&gt;Ask questions, so you don&#39;t waste your time getting stuck on a problem for too long.&lt;/p&gt;
+&lt;p&gt;Effective communication is incredibly important this is something I struggled with, learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else&#39;s. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration. For a complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.&lt;/p&gt;
 &lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/gsoc/gosc-6-24/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The thing I struggled with the most is being a effective communicator and learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else&#39;s. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration. For complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.&lt;/p&gt;
-&lt;p&gt;When I was freelancing couple years ago I worked on a project making a VLC extension for some movie producer. A lot of the documentation had been dated, so I was left to dig up the code base. Back then I didn&#39;t know a lick of C and always wondered how VLC worked under the hood. Now I know parts of it :) and I had alot of fun coding this summer.&lt;br&gt;
-Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, and being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.&lt;/p&gt;
+&lt;p&gt;I&#39;m grateful to be able to partake in g&#39;soc 24 with VLC. I was in awe of the inner workings of VLC. For the future I want to contribute more performance optimizations and low level related code like a video filter or adding the caching playlist probing.&lt;/p&gt;
+&lt;p&gt;Thank you Alexandre Janniaux for your patience with me, teaching me to be better communicator, for always being there to support me and answer my questions and overall being an amazing mentor. And thank you Jean-Baptiste Kempf for making this possible.&lt;/p&gt;
 </content>
 	</entry>
 	
