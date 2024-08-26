@@ -99,7 +99,7 @@ Currently the new Autorun Start function is not 100% done, it loads the data and
 
 {% image "./autorun-diagram.jpg" ,"test"%}
 
-## Future Work
+Future Work
 
 - AutorunStart should create marked extension threads and enabled them.
 
