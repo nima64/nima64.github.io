@@ -108,11 +108,13 @@ Future Work
 ## Hurdles and What I learned From them
 
 For large code bases make sure you understand the common code and libraries. For example in vlc how is oop implement, what are interfaces and modules.
+
 Don't focus on understanding what every line of code is doing, instead try to look at the big picture, what is this chunk of code doing?
 
 Ask questions, so you don't waste your time getting stuck on a problem for too long.
 
-Effective communication is incredibly important this is something I struggled with, learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else's. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration. For a complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.
+Effective communication is incredibly important this is something I struggled with, learning how to communicate your ideas effectively and clearly is very difficult the idea in your head might be different than what someone else's. Being able to show what you mean so both parties can come to consensus is very important to a successful collaboration.  
+For a complex module I found sharing diagrams to express the general idea first before proceeding to code was a huge time saver, so my mentor could check the validity of the idea before I started coding.
 
 ## Conclusion  
 
