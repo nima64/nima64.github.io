@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Tagged “GSOC”</title>
-		<meta name="description" content="blog about math and computer science">
+		<title>Dayton Sheets</title>
+		<meta name="description" content="Moving google Sheets Work Flow to custom RFQ Web App">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="nyima tamang blog">
 		<link rel="alternate" href="/feed/feed.json" type="application/json" title="nyima tamang blog">
 
@@ -20,25 +20,174 @@
 		
 		<link href="/fa-free/css/all.min.css" rel="stylesheet"/>
 		<style>
-			.postlist { counter-reset: start-from 2 }
-/* Message Box */
-.message-box {
-	--color-message-box: #ffc;
+			/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
 
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
 	display: block;
-	background-color: var(--color-message-box);
-	color: var(--color-gray-90);
-	padding: 1em 0.625em; /* 16px 10px /16 */
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
 }
-.message-box ol {
-	margin-top: 0;
-}
-
-/* @media (prefers-color-scheme: dark) {
-	.message-box {
-		--color-message-box: #082840;
-	}
-} */
 * { box-sizing: border-box; }
 /* Defaults */
 :root {
@@ -373,26 +522,102 @@ h2 + .header-anchor {
 		</header>
 
 		<main class="container-md mx-auto " id="skip">
-			<!-- Delete this message, it will also remove the component CSS from the bundle -->
+			<div class="mx-auto" style="max-width: 40em">
+	
 
-<!-- Stop deleting -->
+	<img style="max-height: 300px;width: auto;" src=>
+	<h1>Dayton Sheets</h1>
+	<ul class="post-metadata">
+		<li>
+			<time datetime="2025-06-30">30 June 2025</time>
+		</li>
+			<li>
+				<a href="/tags/rfq-custom-qouting-software-mern-firebase-typescript-nextjs/" class="post-tag">RFQ, Custom Qouting Software, MERN, firebase, typescript, Nextjs</a>
+			</li>
+	</ul>
+<aside>
+  <nav class="toc" >
+        <ol><li><a href="#building-dayton-sheets">Building Dayton Sheets</a><ol><li><a href="#some-of-the-challenges-and-constraints-we-faced">Some of the challenges and constraints we faced</a></li><li><a href="#modeling-sellers-and-buyers">Modeling Sellers and Buyers</a></li><li><a href="#handling-up-to-100-users-and-real-time-updates">Handling up to 100 users and real time updates</a></li><li><a href="#in-house-tanstack-grid-vs-comercial-grid">In house Tanstack grid vs comercial grid</a></li></ol></li></ol>
+      </nav>
+</aside>
+	​<p><picture><source type="image/avif" srcset="/img/IcGUwTk1rc-1366.avif 1366w"><source type="image/webp" srcset="/img/IcGUwTk1rc-1366.webp 1366w"><img alt="offers" loading="lazy" decoding="async" src="/img/IcGUwTk1rc-1366.png" width="1366" height="910"></picture>
+<em>(buyer view)</em></p>
+<h2 id="building-dayton-sheets" tabindex="-1">Building Dayton Sheets <a class="header-anchor" href="#building-dayton-sheets">#</a></h2>
+<p>In one week, Mario and I built a mvp quoting software for Dayton Financial. We converted their labourous process from entering seller data in a buyer sheet into a streamlined full stack webapp. It saved the company thousands of dollars in monthly operation costs.</p>
+<p>The vision for the project was to have master sheet with products that would sellers could enter their qoutes and they would be grouped and dispalyed. This setup of private sellers, a master sheet where any changes would reflect seller sheets and providing real time updates required real engineering and man hours to build the mvp in one week.</p>
+<p>We decided the on the following stack: <strong>Firebase, Tanstack, Nextjs, Typescript, Reactjs</strong></p>
+<h3 id="some-of-the-challenges-and-constraints-we-faced" tabindex="-1">Some of the challenges and constraints we faced <a class="header-anchor" href="#some-of-the-challenges-and-constraints-we-faced">#</a></h3>
+<ul>
+<li>Modeling data seller &amp; master sheets</li>
+<li>Data synchronizaiton between master &amp; seller</li>
+<li>responsive spreadsheet component(under 100ms render for input)</li>
+<li>can columns change?</li>
+<li>handle up to 100 sellers at anytime
+<ul>
+<li>at most 20,000 api firebase requests in an hour(Free tier limit)</li>
+</ul>
+</li>
+</ul>
+<p>How we solved these problems will be discussed in this blog</p>
+<h3 id="modeling-sellers-and-buyers" tabindex="-1">Modeling Sellers and Buyers <a class="header-anchor" href="#modeling-sellers-and-buyers">#</a></h3>
+<p><picture><source type="image/avif" srcset="/img/lktV54tQxk-1554.avif 1554w"><source type="image/webp" srcset="/img/lktV54tQxk-1554.webp 1554w"><img alt="ERD" loading="lazy" decoding="async" src="/img/lktV54tQxk-1554.png" width="1554" height="1022"></picture>
+Arguably the hardest part of this project was modeling buyers and sellers. A seller copies are contained inside buyer/template sheets. Because buyer sheets are templates updates are unidirectional, any update in the template must be applied to all seller sheets but not vise versa.
+We decided to make the changes on the seller sheets only store the rows that were changed. The buyer display will take those changes and group them by their row id.</p>
+<pre class="language-javascript" tabindex="0"><code class="language-javascript"> MasterSheet <span class="token punctuation">{</span>
+  <span class="token literal-property property">templateId</span><span class="token operator">:</span>  string<span class="token punctuation">;</span>       <span class="token comment">// PK</span>
+  <span class="token literal-property property">buyerId</span><span class="token operator">:</span>     string<span class="token punctuation">;</span>       <span class="token comment">// FK → Buyer.userId</span>
+  <span class="token literal-property property">title</span><span class="token operator">:</span>       string<span class="token punctuation">;</span>
+  <span class="token literal-property property">columns</span><span class="token operator">:</span>     string<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token literal-property property">rows</span><span class="token operator">:</span>        Row<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token literal-property property">sellers</span><span class="token operator">:</span>     string<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>     <span class="token comment">// UserIds</span>
+  sellerCopies<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> Row<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">;</span> <span class="token comment">// optional per-seller view</span>
+<span class="token punctuation">}</span>
 
-<h1>Tagged “GSOC”</h1>
+ SellerCopy <span class="token punctuation">{</span>
+  <span class="token literal-property property">templateId</span><span class="token operator">:</span> string<span class="token punctuation">;</span>  <span class="token comment">// PK (composite)</span>
+  <span class="token literal-property property">sellerId</span><span class="token operator">:</span>   string<span class="token punctuation">;</span>  <span class="token comment">// PK</span>
+  <span class="token literal-property property">rows</span><span class="token operator">:</span>       Row<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/// rest in on github....</span></code></pre>
+<br />
+<h3 id="handling-up-to-100-users-and-real-time-updates" tabindex="-1">Handling up to 100 users and real time updates <a class="header-anchor" href="#handling-up-to-100-users-and-real-time-updates">#</a></h3>
+<p>We made the assumption of at most 100 users at any given time, we had to figure out a way to limit our api requests to prevent the 20k requests per hour limit. If we sent updates on the sheet ever second our api would easily hit the limit, so we decided to make a buffer that would hold the changes. We would check this buffer every 3 seconds for changes and if changes exist make api request.</p>
+<p><picture><source type="image/avif" srcset="/img/ZGJ_7F_0-t-1318.avif 1318w"><source type="image/webp" srcset="/img/ZGJ_7F_0-t-1318.webp 1318w"><img alt="seller-edit" loading="lazy" decoding="async" src="/img/ZGJ_7F_0-t-1318.png" width="1318" height="358"></picture></p>
+<p>This had one big issue race conditions... Lucky my background from Google summer of code helpled me navigate this bug. The problem was that changes could occur were added to the buffer could happen <em>during</em> API requests, then they would be cleared immediatly after to reset the buffer. If they were added during the api requests, they were would never get to be able to be processed. So the solution was make an pre processing queue that would be cleared immediatley before the api call and contain all changes during the api call.</p>
+<pre class="language-typescript" tabindex="0"><code class="language-typescript"><span class="token keyword">const</span> queuedCells <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> processedCells <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Pending API updates</span>
 
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>queuedCells<span class="token punctuation">.</span>size <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
 
+    <span class="token comment">// Move user changes from queued to processed</span>
+    queuedCells<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>update<span class="token punctuation">,</span> key<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      processedCells<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> update<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Latest value wins</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<ol reversed class="postlist">
+    queuedCells<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<li class="postlist-item">
-		<a href="/blog/gsoc/gosc-6-24/" class="postlist-link">Summer of code with Video Lan</a>
-		<time class="postlist-date" datetime="2024-06-01">June 2024</time>
-	</li>
+    <span class="token comment">//async can trigger can the person is making changes to row</span>
+    <span class="token function">makeApiCall</span><span class="token punctuation">(</span><span class="token string">"/api/sheet/batch-update?"</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        processedCells<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        <span class="token comment">// dump processed cells back into queue  </span>
+        processedCells<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>update<span class="token punctuation">,</span> key<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+          queuedCells<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> update<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3 id="in-house-tanstack-grid-vs-comercial-grid" tabindex="-1">In house Tanstack grid vs comercial grid <a class="header-anchor" href="#in-house-tanstack-grid-vs-comercial-grid">#</a></h3>
+<p>Towards the end of the project, we had to implement row grouping and column sorting. Mui grid and Ag-grid were upwards of 500-1k annually, and they were all built on top of tanstack. So naturally being the crafty engineers we were we bulid our own grid on top of Tanstack this way if we ever need to make changes to the grid we knew exactly how it worked with the added expense of technical debt hahahaha.</p>
 
-</ol>
-
-
-<p>See <a href="/tags/">all tags</a>.</p>
-
+			<ul class="links-nextprev">
+					<li>Previous: <a href="/blog/gsoc/gosc-6-24/">Summer of code with Video Lan</a>
+					</li>
+				
+			</ul>
+</div>
 		</main>
 
 		<footer></footer>
@@ -400,6 +625,6 @@ h2 + .header-anchor {
 			
 		</script>
 
-		<!-- Current page: /tags/gsoc/ -->
+		<!-- Current page: /blog/rfq-dayton/rfq-datyon/ -->
 	</body>
 </html>
