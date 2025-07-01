@@ -541,7 +541,7 @@ h2 + .header-anchor {
       </nav>
 </aside>
 	​<p><picture><source type="image/avif" srcset="/img/IcGUwTk1rc-1366.avif 1366w"><source type="image/webp" srcset="/img/IcGUwTk1rc-1366.webp 1366w"><img alt="offers" loading="lazy" decoding="async" src="/img/IcGUwTk1rc-1366.png" width="1366" height="910"></picture>
-<em>(buyer view)</em></p>
+<em>buyer view</em></p>
 <h2 id="building-dayton-sheets" tabindex="-1">Building Dayton Sheets <a class="header-anchor" href="#building-dayton-sheets">#</a></h2>
 <p>In one week, Mario and I built a mvp quoting software for Dayton Financial. We converted their laborious process from entering seller data in a buyer sheet into a streamlined full stack web app. It saved the company thousands of dollars in monthly operation costs.</p>
 <p>The vision for the project was to have a master sheet with products that sellers could enter their quotes and they would be grouped and displayed. This setup of private sellers, a master sheet where any changes would reflect seller sheets and providing real time updates required real engineering and man hours to build the mvp in one week.</p>
@@ -561,8 +561,8 @@ h2 + .header-anchor {
 <p>How we solved these problems will be discussed in this blog</p>
 <h3 id="modeling-sellers-and-buyers" tabindex="-1">Modeling Sellers and Buyers <a class="header-anchor" href="#modeling-sellers-and-buyers">#</a></h3>
 <p><picture><source type="image/avif" srcset="/img/lktV54tQxk-1554.avif 1554w"><source type="image/webp" srcset="/img/lktV54tQxk-1554.webp 1554w"><img alt="ERD" loading="lazy" decoding="async" src="/img/lktV54tQxk-1554.png" width="1554" height="1022"></picture>
-Arguably the hardest part of this project was modeling buyers and sellers. A seller's copies are contained inside buyer/template sheets. Because buyer sheets template updates are unidirectional, any update in the template must be applied to all seller sheets but not vice versa.
-We decided to make the changes on the seller sheets only store the rows that were changed. The buyer display will take those changes and group them by their row id.</p>
+Arguably the hardest part of this project was modeling buyers and sellers. A seller's copies are contained inside buyer/template sheets. Because buyer sheets template updates are unidirectional, any update in the template must be applied to all seller sheets but not vice versa.</p>
+<p>We decided to make the changes on the seller sheets only store the rows that were changed. The buyer display will take those changes and group them by their row id.</p>
 <pre class="language-javascript" tabindex="0"><code class="language-javascript"> MasterSheet <span class="token punctuation">{</span>
   <span class="token literal-property property">templateId</span><span class="token operator">:</span>  string<span class="token punctuation">;</span>       <span class="token comment">// PK</span>
   <span class="token literal-property property">buyerId</span><span class="token operator">:</span>     string<span class="token punctuation">;</span>       <span class="token comment">// FK → Buyer.userId</span>
@@ -582,7 +582,9 @@ We decided to make the changes on the seller sheets only store the rows that wer
 <br />
 <h3 id="handling-up-to-100-users-and-real-time-updates" tabindex="-1">Handling up to 100 users and real time updates <a class="header-anchor" href="#handling-up-to-100-users-and-real-time-updates">#</a></h3>
 <p>We made the assumption of at most 100 users at any given time, so we had to figure out a way to limit our API requests to stay under Firebase's 20k requests per hour limit. If we sent updates every second, we would easily hit this limit, so we decided to implement a buffer that would hold the changes. We check this buffer every 3 seconds for changes and make a API request if any changes exist.</p>
-<p><picture><source type="image/avif" srcset="/img/ZGJ_7F_0-t-1318.avif 1318w"><source type="image/webp" srcset="/img/ZGJ_7F_0-t-1318.webp 1318w"><img alt="seller-edit" loading="lazy" decoding="async" src="/img/ZGJ_7F_0-t-1318.png" width="1318" height="358"></picture></p>
+<p><picture><source type="image/avif" srcset="/img/ZGJ_7F_0-t-1318.avif 1318w"><source type="image/webp" srcset="/img/ZGJ_7F_0-t-1318.webp 1318w"><img alt="seller-edit" loading="lazy" decoding="async" src="/img/ZGJ_7F_0-t-1318.png" width="1318" height="358"></picture>
+<em>seller view</em>
+<br/></p>
 <p>This approach had <strong>one big issue: race conditions</strong>. Luckily my background from Google Summer of Code helped me navigate this bug. The problem was that user changes could be added to the buffer during an API request, but then get cleared immediately after when we reset the buffer. This meant those changes would never be processed.</p>
 <p>The solution was to implement a two-buffer system: a processed buffer that gets cleared immediately before each API call and a queque holds any changes that occur during the request, preventing data loss.</p>
 <pre class="language-typescript" tabindex="0"><code class="language-typescript"><span class="token keyword">const</span> queuedCells <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
