@@ -93,12 +93,18 @@ p:last-child {
 	margin-bottom: 0;
 }
 p {
-	line-height: 1.5;
+	/* line-height: 1.5; */
+	line-height: 1.75rem; /* Tailwind's text-lg line-height */
+	font-size: 1.125rem; /* Tailwind's text-lg font-size */
 }
 
 li {
-	line-height: 1.5;
+	/* line-height: 1.5; */
+	line-height: 1.75rem; /* Tailwind's text-lg line-height */
+	font-size: 1.125rem; /* Tailwind's text-lg font-size */
 }
+
+
 
 a[href] {
 	color: var(--text-color-link);
