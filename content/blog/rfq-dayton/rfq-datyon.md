@@ -56,7 +56,7 @@ We made the assumption of at most 100 users at any given time, so we had to figu
 
 {% image "./seller-edit.png" ,"seller-edit"%}
 
-This approach had one big issue: race conditions. Luckily my background from Google Summer of Code helped me navigate this bug. The problem was that user changes could be added to the buffer during an API request, but then get cleared immediately after when we reset the buffer. This meant those changes would never be processed.
+This approach had **one big issue: race conditions**. Luckily my background from Google Summer of Code helped me navigate this bug. The problem was that user changes could be added to the buffer during an API request, but then get cleared immediately after when we reset the buffer. This meant those changes would never be processed.
 The solution was to implement a two-buffer system: a processed buffer that gets cleared immediately before each API call and a queque holds any changes that occur during the request, preventing data loss.
 
 ``` typescript
