@@ -52,11 +52,12 @@ We decided to make the changes on the seller sheets only store the rows that wer
 <br />
 
 ### Handling up to 100 users and real time updates
-We made the assumption of at most 100 users at any given time, so we had to figure out a way to limit our API requests to stay under Firebase's 20k requests per hour limit. If we sent updates every second, we would easily hit this limit, so we decided to implement a buffer that would hold the changes. We check this buffer every 3 seconds for changes and make a single API request if any exist.
+We made the assumption of at most 100 users at any given time, so we had to figure out a way to limit our API requests to stay under Firebase's 20k requests per hour limit. If we sent updates every second, we would easily hit this limit, so we decided to implement a buffer that would hold the changes. We check this buffer every 3 seconds for changes and make a API request if any changes exist.
 
 {% image "./seller-edit.png" ,"seller-edit"%}
 
 This approach had **one big issue: race conditions**. Luckily my background from Google Summer of Code helped me navigate this bug. The problem was that user changes could be added to the buffer during an API request, but then get cleared immediately after when we reset the buffer. This meant those changes would never be processed.
+
 The solution was to implement a two-buffer system: a processed buffer that gets cleared immediately before each API call and a queque holds any changes that occur during the request, preventing data loss.
 
 ``` typescript
