@@ -7,7 +7,7 @@ tags:
 ---
 
 {% image "./offers.png" ,"offers"%}
-*(buyer view)*
+*buyer view*
 ## Building Dayton Sheets
 In one week, Mario and I built a mvp quoting software for Dayton Financial. We converted their laborious process from entering seller data in a buyer sheet into a streamlined full stack web app. It saved the company thousands of dollars in monthly operation costs. 
 
@@ -29,6 +29,7 @@ How we solved these problems will be discussed in this blog
 
 {% image "./ERD.png" ,"ERD"%}
 Arguably the hardest part of this project was modeling buyers and sellers. A seller's copies are contained inside buyer/template sheets. Because buyer sheets template updates are unidirectional, any update in the template must be applied to all seller sheets but not vice versa.
+
 We decided to make the changes on the seller sheets only store the rows that were changed. The buyer display will take those changes and group them by their row id.
 
 ``` javascript
@@ -55,6 +56,8 @@ We decided to make the changes on the seller sheets only store the rows that wer
 We made the assumption of at most 100 users at any given time, so we had to figure out a way to limit our API requests to stay under Firebase's 20k requests per hour limit. If we sent updates every second, we would easily hit this limit, so we decided to implement a buffer that would hold the changes. We check this buffer every 3 seconds for changes and make a API request if any changes exist.
 
 {% image "./seller-edit.png" ,"seller-edit"%}
+*seller view*
+<br/>
 
 This approach had **one big issue: race conditions**. Luckily my background from Google Summer of Code helped me navigate this bug. The problem was that user changes could be added to the buffer during an API request, but then get cleared immediately after when we reset the buffer. This meant those changes would never be processed.
 
